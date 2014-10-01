@@ -1,0 +1,14 @@
+{% extends 'layouts/base.twig' %}
+{% block content %}
+    <h1>{{ post.category }}</h1>
+
+    <ul>
+    {% for post in posts %}
+        <li>
+            <b><a href="{{ post.permalink }}">{{ post.title }}</a></b>
+            <p>{{ post.get_content | excerpt(5) }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

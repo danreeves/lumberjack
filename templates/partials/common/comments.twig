@@ -1,0 +1,37 @@
+
+ <div id="comments" class="comments-area">
+    {% set comments = post.comments %}
+    {% set comment_pages_count = fn('get_comment_pages_count', comments) %}
+    {% set comments_open = fn('comments_open') %}
+    {% set comments_allowed = fn('post_type_supports', post.post_type, 'comments') %}
+
+    {% if comments %}
+
+        <h2 class="comments-title">Comments</h2>
+
+        <ul class="comment-list">
+            {{ fn('wp_list_comments', {
+                'style': 'ul'
+            }, comments) }}
+        </ul>
+
+        {% if comment_pages_count > 1 %}
+            <nav id="comment-nav" class="comment-navigation" role="navigation">
+                <h1 class="screen-reader-text">Comment navigation</h1>
+                <div class="nav-previous">{{ fn('previous_comments_link', '&larr; Older Comments') }}</div>
+                <div class="nav-next">{{ fn('next_comments_link', 'Newer Comments &rarr;') }}</div>
+            </nav>
+        {% endif %}
+
+    {% endif %}
+
+    {# If comments are closed and there are comments, let's leave a little note, shall we? #}
+    {% if not comments_open and comments|length != 0 and comments_allowed %}
+        <p class="no-comments">Comments are closed.</p>
+    {% endif %}
+
+    {% if comments_open and comments_allowed %}
+        {% include 'partials/common/comment_form.twig' %}
+    {% endif %}
+
+</div><!-- #comments -->
