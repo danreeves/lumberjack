@@ -259,7 +259,7 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head'); // Post relational 
 
 /********************************************************************************************
 *   3. CUSTOM FUNCTIONS
-*   Used for repetetive tasks in the theme
+*   Used for repetitive tasks in the theme
 *********************************************************************************************/
 
 function get_top_level_term ($term, $taxonomy) {

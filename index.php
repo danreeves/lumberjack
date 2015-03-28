@@ -25,7 +25,17 @@ $view = 'index';
 // Load specific views
 if (is_single()) require_once 'views/single.php';
 if (is_page()) require_once 'views/page.php';
-if (is_category()) require_once 'views/category.php';
 if (is_404()) require_once 'views/404.php';
+if (is_archive()) {
+	if (is_tax()) {
+		require_once 'views/tax.php';
+	}
+	elseif (is_category()) {
+		require_once 'views/category.php';
+	}
+	else {
+		require_once 'views/archive.php';
+	}
+}
 
 echo '<br/>Rendering '.$view.' took '.TimberHelper::stop_timer($timberTimer);
