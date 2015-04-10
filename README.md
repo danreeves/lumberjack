@@ -20,7 +20,8 @@ Installation
 
 To get up and running:
 
-**[The Timber plugin is required](http://upstatement.com/timber/)**
+**[The Timber plugin is required](http://upstatement.com/timber/) *before* you enable the theme**
+
  - Clone this repo or download and extract the zip into the themes folder in WordPress.
  - Enable the Lumberjack theme from the admin panel.
 
