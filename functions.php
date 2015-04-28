@@ -22,8 +22,20 @@ $GLOBALS['assets'] = '/assets/';
 $GLOBALS['current_user'] = wp_get_current_user();
 
 // Set up Timber
-
-Timber::$dirname = 'templates';
+//  check for existence of Tinber class and catch and present an error if it doesn't exist
+//  as this implies that the plugin is not installed / activated
+//  we could do this even better as per here:
+//  http://ottopress.com/2012/themeplugin-dependencies/
+if (class_exists('Timber')) {
+    Timber::$dirname = 'templates';
+}
+else {
+    function admin_error_notice() {
+        echo '<div class="error"><p>The '.wp_get_theme()->Name.' theme requires the Timber plugin to be installed and activated. '.
+            'Install and activate the plugin or switch to a different theme.</p></div>';
+    }
+    add_action( 'admin_notices', 'admin_error_notice' );
+}
 
 add_filter('get_twig', 'add_to_twig');
 add_filter( 'timber_context', 'add_to_context' );
